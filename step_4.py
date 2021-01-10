@@ -3,9 +3,16 @@ import numpy as np
 
 def common_elems_num1(subset_elements, all_elements):
     ''' 
-    returns a tuple of the number of common elements and time taken using sets
-
-    subset_elements, all_elements: list
+    Gets the number of common elements using the set operation - intersection
+    PARAMETERS:
+    -------------
+    subset_elements: list of strings, 
+    all_elements  : list of strings
+    
+    RETURNS:
+    -------------
+    number of common elements and the duration for execution
+    
     '''
     
     # records the starting time to calculate the time taken for implementation
@@ -25,9 +32,16 @@ def common_elems_num1(subset_elements, all_elements):
 
 def common_elems_num2(subset_elements, all_elements):
     ''' 
-    returns a tuple of the number of common elements and time taken using NumPy
-
-    subset_elements, all_elements: list
+    Gets the number of common elements using the NumPy array operation - intersect1d
+    PARAMETERS:
+    -------------
+    subset_elements: list of strings
+    all_elements  : list of strings
+    
+    RETURNS:
+    -------------
+    number of common elements and the duration for execution
+    
     '''
     # records the starting time to calculate the time taken for implementation
     start = time.time()
@@ -41,10 +55,17 @@ def common_elems_num2(subset_elements, all_elements):
     return len(verfied_elements), duration
 
 def common_elems_num3(subset, all_elements):
-    '''
-    returns a tuple of the number of common elements and time taken using the traditional comparison using for loop
-
-    subset_elements, all_elements: list
+    ''' 
+    Gets the number of common elements using the traditional for-loop + comparison method
+    PARAMETERS:
+    -------------
+    subset_elements: list of strings
+    all_elements  : list of strings
+    
+    RETURNS:
+    -------------
+    number of common elements and the duration for execution
+    
     '''
 
     #the time when the execution begins
