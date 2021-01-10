@@ -15,11 +15,16 @@ event, values = window.read()
 pokemon = values[0].lower()
 print('Pokemon: ', pokemon)
 
-poke_type = pd.get_type(pokemon)
+url = 'https://pokeapi.co/api/v2/pokemon/'+pokemon
 
-
+poke_type = pd.get_type(url)
+damage_from = pd.damage_from(url)
+new_url = ['https://pokeapi.co/api/v2/pokemon/type/'+i for i in damage_from]
+print(new_url)
 poke_type_column = [
-    [sg.Text(poke_type)],
+    [sg.Text("Type: "+poke_type.capitalize())],
+    [sg.Text("Damage from: "+"".join(damage_from).capitalize())],
+    #[sg.Text("Attackers: "+"".join(pd.get5_attackers(new_url[0])).capitalize())],
 
     [sg.Text(size=(40, 1), key="-TOUT-")],
 ]
