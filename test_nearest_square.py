@@ -8,3 +8,4 @@ def test_nearest_square_9():
     assert(nearest_square(9)==9)
 def test_nearest_square_23():
     assert(nearest_square(23)==16)
+
