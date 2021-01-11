@@ -1,4 +1,4 @@
-import requests
+import requests, pprint
 import json
 
 
@@ -46,6 +46,7 @@ def damage_from(url):
     response = requests.get(url)
 
     list_to_return = []
+    damage_url_list = []
 
     types = response.json()['types']
     for i in range(len(types)):
@@ -64,28 +65,37 @@ def damage_from(url):
             for damage in damage_from:
                 #damage - dictionary
                 list_to_return.append(damage['name'])
+                damage_url_list.append(damage['url'])
                 print(damage['name'])
-    return list_to_return
+
+    print(list_to_return,  damage_url_list)
+    return list_to_return,  damage_url_list
 
 
 def get5_attackers(url):
+    print(url)
     response = requests.get(url)
 
     print("Double damage from:")
     double_dam_url = []
     dam_rel = response.json()['damage_relations']
+    attacker_dict = {}
 
     for dam in range(len(dam_rel['double_damage_from'])):
         double_dam_url.append(dam_rel['double_damage_from'][dam]['url'])
-        print(dam_rel['double_damage_from'][dam]['name'])
-    print((double_dam_url[0]))
+        #print(dam_rel['double_damage_from'][dam]['name'])
+        attacker_dict[dam_rel['double_damage_from'][dam]['name']] = ''
 
-    attackers = []
-    for dam_url in double_dam_url:
-        response = requests.get(dam_url)
-        pokemon = response.json()['pokemon']
-        for ind in range(5):
-            attackers.append(pokemon[ind]['pokemon']['name'])
-            print(pokemon[ind]['pokemon']['name'])
+        attackers = []
+        for dam_url in double_dam_url:
+            response = requests.get(dam_url)
+            pokemon = response.json()['pokemon']
+            for ind in range(5):
+                attackers.append(pokemon[ind]['pokemon']['name'])
+                #print(pokemon[ind]['pokemon']['name'])
+            
+            attacker_dict[dam_rel['double_damage_from'][dam]['name']] = attackers
 
-    return attackers
+    return attacker_dict
+
+#pprint.pprint(get5_attackers('https://pokeapi.co/api/v2/type/3'))
